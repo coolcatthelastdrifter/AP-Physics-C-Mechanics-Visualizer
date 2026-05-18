@@ -81,9 +81,11 @@ public class LoadingScript : MonoBehaviour
 
     public void ContinueToScene()
     {
+        Debug.Log("READY TO CONTINUE");
         if (readyToContinue)
         {
             currentOperation.allowSceneActivation = true;
+            Debug.Log("Continued");
         }
     }
 }
