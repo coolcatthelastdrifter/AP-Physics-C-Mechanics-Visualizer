@@ -3,66 +3,87 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class LoadingScript : MonoBehaviour
 {
     public GameObject loadingScreen;
-    public UnityEngine.UI.Slider loadingSlider;
+    public Image loadingArrow;
     public TextMeshProUGUI progressText;
 
-    // How long the loading screen should stay visible at minimum
-    public float minimumLoadTime = 1f;
+    public Button continueButton;
 
-    // How quickly the UI catches up
-    public float smoothSpeed = 3f;
+    public float rotationSpeed = 180f;
+
+    private bool isLoading = false;
+    private bool readyToContinue = false;
+
+    private AsyncOperation currentOperation;
 
     public void LoadLevel(int sceneIndex)
     {
         loadingScreen.SetActive(true);
+
+        continueButton.gameObject.SetActive(false);
+
+        loadingArrow.rectTransform.rotation = Quaternion.identity;
+
+        isLoading = true;
+
         StartCoroutine(LoadAsynchronously(sceneIndex));
+    }
+
+    private void Update()
+    {
+        if (isLoading)
+        {
+            loadingArrow.rectTransform.Rotate(
+                0f,
+                0f,
+                rotationSpeed * Time.deltaTime
+            );
+        }
     }
 
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
         float timer = 0f;
-        float displayedProgress = 0f;
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        currentOperation = SceneManager.LoadSceneAsync(sceneIndex);
+        currentOperation.allowSceneActivation = false;
 
-        // Prevent scene from activating immediately
-        operation.allowSceneActivation = false;
-
-        while (!operation.isDone)
+        while (!currentOperation.isDone)
         {
             timer += Time.deltaTime;
 
-            // Real loading progress (0 -> 1)
-            float targetProgress = Mathf.Clamp01(operation.progress / 0.9f);
+            float progress =
+                Mathf.Clamp01(currentOperation.progress / 0.9f);
 
-            // Smoothly animate UI
-            displayedProgress = Mathf.MoveTowards(
-                displayedProgress,
-                targetProgress,
-                smoothSpeed * Time.deltaTime
-            );
+            progressText.text =
+                Mathf.RoundToInt(progress * 100f) + "%";
 
-            loadingSlider.value = displayedProgress;
-            progressText.text = Mathf.RoundToInt(displayedProgress * 100f) + "%";
-
-            // When fully loaded AND minimum time passed
-            if (targetProgress >= 1f && timer >= minimumLoadTime)
+            if (progress >= 1f)
             {
-                // Optional: fill bar completely first
-                loadingSlider.value = 1f;
-                progressText.text = "100%";
+                loadingArrow.gameObject.SetActive(false);
+                isLoading = false;
 
-                yield return new WaitForSeconds(0.25f);
+                progressText.text = "Press Continue";
 
-                operation.allowSceneActivation = true;
+                continueButton.gameObject.SetActive(true);
+
+                readyToContinue = true;
+
+                yield break;
             }
 
             yield return null;
+        }
+    }
+
+    public void ContinueToScene()
+    {
+        if (readyToContinue)
+        {
+            currentOperation.allowSceneActivation = true;
         }
     }
 }
