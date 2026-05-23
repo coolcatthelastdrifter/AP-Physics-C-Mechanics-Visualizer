@@ -5,9 +5,11 @@ using UnityEngine;
 public class LoadSceneOnStart : MonoBehaviour
 {
     public int sceneIndexToLoad;
+    public bool manualContinue;
+    public LevelLoader levelLoader;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<LoadingScript>().LoadLevel(sceneIndexToLoad);
+        levelLoader.LoadLevel(sceneIndexToLoad, manualContinue);
     }
 }
