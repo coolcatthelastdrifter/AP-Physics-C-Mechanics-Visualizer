@@ -1,31 +1,28 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaceablesSystem : MonoBehaviour
 {
-    //public bool TryPlacingPlaceable(string placeableName, Transform placementTransform, Dictionary<string, string> propertiesToChange)
-    //{
-    //    if (PlaceablePrefabs.TryGetValue(placeableName, out GameObject prefab))
-    //    {
-    //        foreach (var item in propertiesToChange)
-    //        {
-    //            Debug.Log($"{item.Key}: {item.Value}");
-    //        }
 
-    //        Instantiate(prefab, placementTransform.position, placementTransform.rotation);
-    //        return true;
-    //    }
+    public string TryPlacingPlaceable(string placeableName, Vector3 position, Quaternion rotation, Dictionary<string, string> optionsToChange){
+        if (PlaceablesDatabase.Instance.PlaceableSOs.TryGetValue(placeableName, out PlaceableData data)){
+            Instantiate(data.prefab, position, rotation);
 
-    //    return false;
-    //}
+            return "Placed Successfully";
+        }
+        else{
+            Debug.LogWarning(placeableName + " doesn't exist in PlaceableDatabase!");
+            return placeableName + " doesn't exist in PlaceableDatabase!";
+        }
+    }
 
-    //private void Start()
-    //{
-    //    PlaceablePrefabs = PlaceablesFetcher
-    //    Dictionary<string, string> propertiesToChange = new() {
-    //    { "Mass", "6.7" },
-    //    };
-
-    //    TryPlacingPlaceable("Block", gameObject.transform, propertiesToChange);
-    //}
+    void Start()
+    {
+        TryPlacingPlaceable("Block", new Vector3(0f, 10f, 0f), Quaternion.identity,new Dictionary<string, string>
+{
+    { "Color", "Red" },
+    { "Mass", "10" }
+});
+    }
 }

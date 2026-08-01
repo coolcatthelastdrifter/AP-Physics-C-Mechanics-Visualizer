@@ -1,31 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaceablesDatabase : MonoBehaviour
 {
-    //public static PlaceablesDatabase Instance { get; private set; }
+    public static PlaceablesDatabase Instance { get; private set; }
 
-    //private Dictionary<string, GameObject> placeableSOs;
+    private Dictionary<string, PlaceableData> placeableSOs;
 
-    //public IReadOnlyDictionary<string, GameObject> PlaceableSOs => placeableSOs;
+    public IReadOnlyDictionary<string, PlaceableData> PlaceableSOs => placeableSOs;
 
-    //void Awake()
-    //{
-    //    if (Instance != null && Instance != this)
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    //    Instance = this;
-    //    DontDestroyOnLoad(gameObject);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
 
-    //    placeablePrefabs = new Dictionary<string, GameObject>();
+        placeableSOs = new Dictionary<string, PlaceableData>();
 
-    //    foreach (GameObject prefab in Resources.LoadAll<GameObject>("Placeables"))
-    //    {
-    //        placeablePrefabs[prefab.name] = prefab;
-    //    }
-    //}
+        foreach (PlaceableData data in Resources.LoadAll<PlaceableData>("PlaceablesSOs"))
+        {
+            placeableSOs[data.name] = data;
+        }
+    }
 }
