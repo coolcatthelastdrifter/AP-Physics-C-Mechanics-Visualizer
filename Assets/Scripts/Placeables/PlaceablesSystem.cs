@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlaceablesSystem : MonoBehaviour
 {
+    private GameObject currentGhostPlaceable;
 
     public string TryPlacingPlaceable(string placeableName, Vector3 position, Quaternion rotation, Dictionary<string, string> optionsToChange){
         if (PlaceablesDatabase.Instance.PlaceableSOs.TryGetValue(placeableName, out PlaceableData data)){
@@ -14,6 +15,17 @@ public class PlaceablesSystem : MonoBehaviour
         else{
             Debug.LogWarning(placeableName + " doesn't exist in PlaceableDatabase!");
             return placeableName + " doesn't exist in PlaceableDatabase!";
+        }
+    }
+
+    public void CreateOrMovePlaceableGhost(string placeableName, Vector3 position, Quaternion rotation)
+    {
+        if (PlaceablesDatabase.Instance.PlaceableSOs.TryGetValue(placeableName, out PlaceableData data)){
+            Instantiate(data.prefab, position, rotation);
+
+        }
+        else{
+            Debug.Log("FINISH THIS");
         }
     }
 
