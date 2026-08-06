@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de99ace64e793cc40af3a9df42a54609, type: 3}
   m_Name: Cylinder
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2951321625620546014, guid: ab2f6bd7abef08a46b4512cbc1c21d45, type: 3}
+  prefab: {fileID: 3068382935206504091, guid: ab2f6bd7abef08a46b4512cbc1c21d45, type: 3}
   icon: {fileID: 0}
-  properties:
-  - Mass
+  changeableproperties: []

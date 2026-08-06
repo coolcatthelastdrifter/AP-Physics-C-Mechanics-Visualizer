@@ -8,5 +8,5 @@ public class PlaceableData : ScriptableObject
     public GameObject prefab;
     public Sprite icon;
 
-    public List<string> properties;
+    public List<string> changeableproperties;
 }

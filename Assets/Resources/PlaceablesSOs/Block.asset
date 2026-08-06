@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de99ace64e793cc40af3a9df42a54609, type: 3}
   m_Name: Block
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8481599788870507828, guid: d92ff7ffa8a073c4a84e558f1d765213, type: 3}
+  prefab: {fileID: 6740449192255980620, guid: 87e099440d702cc4bad19060e90ea19a, type: 3}
   icon: {fileID: 0}
-  properties:
-  - Mass
+  changeableproperties: []
