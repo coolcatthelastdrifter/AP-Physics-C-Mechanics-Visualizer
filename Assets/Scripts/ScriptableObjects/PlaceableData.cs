@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlaceableData : ScriptableObject
 {
     public GameObject prefab;
+    public GameObject prefabGhost;
     public Sprite icon;
 
     public List<string> changeableproperties;
