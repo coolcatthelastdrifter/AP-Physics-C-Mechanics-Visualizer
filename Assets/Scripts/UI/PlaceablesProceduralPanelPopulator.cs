@@ -18,6 +18,10 @@ public class PlaceablesProceduralPanelPopulator : MonoBehaviour
             clone.name = key;
             clone.transform.Find("Image").GetComponent<Image>().sprite = value.icon;
             clone.transform.Find("NameHolder").transform.Find("Name").GetComponent<TextMeshProUGUI>().text = key;
+
+            clone.GetComponent<Button>().onClick.AddListener(() =>
+                PlaceablesSystem.Instance.SetCurrentGhostPlaceable(clone.name)
+            );
         }
 
         Destroy(exampleGridElement);
