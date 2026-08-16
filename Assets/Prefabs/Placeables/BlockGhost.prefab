@@ -56,8 +56,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockGhost
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6927905320911702598, guid: 87e099440d702cc4bad19060e90ea19a, type: 3}
+    - target: {fileID: 6927905320911702598, guid: 87e099440d702cc4bad19060e90ea19a, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

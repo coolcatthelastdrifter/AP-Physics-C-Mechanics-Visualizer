@@ -64,6 +64,11 @@ public class PlaceablesSystem : MonoBehaviour
 
     public void SetCurrentGhostPlaceable(string name)
     {
+        if (currentGhostPlaceable)
+        {
+            return;
+        }
+        
         PlacementResult result = CreatePlaceable(name, new Vector3(), new Quaternion(), true);
 
         if (result.placementSucess)

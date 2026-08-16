@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,9 +20,10 @@ public class PlaceablesProceduralPanelPopulator : MonoBehaviour
             clone.transform.Find("Image").GetComponent<Image>().sprite = value.icon;
             clone.transform.Find("NameHolder").transform.Find("Name").GetComponent<TextMeshProUGUI>().text = key;
 
-            clone.GetComponent<Button>().onClick.AddListener(() =>
-                PlaceablesSystem.Instance.SetCurrentGhostPlaceable(clone.name)
-            );
+            clone.GetComponent<Button>().onClick.AddListener(() => {
+                PlaceablesSystem.Instance.ClearCurrentGhostPlaceable();
+                PlaceablesSystem.Instance.SetCurrentGhostPlaceable(clone.name);
+            });
         }
 
         Destroy(exampleGridElement);
