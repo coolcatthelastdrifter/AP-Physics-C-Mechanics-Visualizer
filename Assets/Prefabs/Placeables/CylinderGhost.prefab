@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CylinderGhost
       objectReference: {fileID: 0}
+    - target: {fileID: 3068382935206504091, guid: ab2f6bd7abef08a46b4512cbc1c21d45, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4688933301851435429, guid: ab2f6bd7abef08a46b4512cbc1c21d45, type: 3}
       propertyPath: m_UseGravity
       value: 0
