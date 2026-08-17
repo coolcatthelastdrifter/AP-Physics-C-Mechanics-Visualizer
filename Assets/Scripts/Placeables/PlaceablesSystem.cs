@@ -40,6 +40,14 @@ public class PlaceablesSystem : MonoBehaviour
         {
             currentGhostPlaceable.GetComponent<Renderer>().material = GhostMaterialRed;
         }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f))
+        {
+            MoveOrRotateCurrentGhostPlaceable(hit.point + new Vector3(0,0.51f,0), currentGhostPlaceable.transform.rotation);
+        }
     }
     public void EnterBuildMode()
     {
@@ -68,7 +76,7 @@ public class PlaceablesSystem : MonoBehaviour
         {
             return;
         }
-        
+
         PlacementResult result = CreatePlaceable(name, new Vector3(), new Quaternion(), true);
 
         if (result.placementSucess)

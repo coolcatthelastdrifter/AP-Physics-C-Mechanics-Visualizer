@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockGhost
       objectReference: {fileID: 0}
+    - target: {fileID: 6740449192255980620, guid: 87e099440d702cc4bad19060e90ea19a, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6927905320911702598, guid: 87e099440d702cc4bad19060e90ea19a, type: 3}
       propertyPath: m_UseGravity
       value: 0
