@@ -8,6 +8,7 @@ public class PlaceablesSystem : MonoBehaviour
 {
     public static PlaceablesSystem Instance { get; private set; }
     private GameObject currentGhostPlaceable;
+    private PlaceableData currentGhostPlaceableData;
     public bool InBuildMode = false;
     public Material GhostMaterialRed;
     public Material GhostMaterialGreen;
@@ -46,7 +47,7 @@ public class PlaceablesSystem : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f))
         {
-            MoveOrRotateCurrentGhostPlaceable(hit.point + new Vector3(0,0.51f,0), currentGhostPlaceable.transform.rotation);
+            MoveOrRotateCurrentGhostPlaceable(hit.point + currentGhostPlaceableData.placementOffset, currentGhostPlaceable.transform.rotation);
         }
     }
     public void EnterBuildMode()
@@ -104,6 +105,7 @@ public class PlaceablesSystem : MonoBehaviour
         }
 
         currentGhostPlaceable = null;
+        currentGhostPlaceableData = null;
     }
 
     public PlacementResult CreatePlaceable(string name, Vector3 position, Quaternion rotation, bool isGhost)
@@ -122,6 +124,7 @@ public class PlaceablesSystem : MonoBehaviour
         if (isGhost)
         {
             prefabToClone = requestedPlaceableData.prefabGhost;
+            currentGhostPlaceableData = requestedPlaceableData;
         }
         else
         {

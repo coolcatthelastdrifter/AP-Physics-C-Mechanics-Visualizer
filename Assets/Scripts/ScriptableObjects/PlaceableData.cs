@@ -10,4 +10,5 @@ public class PlaceableData : ScriptableObject
     public Sprite icon;
 
     public List<string> changeableproperties;
+    public Vector3 placementOffset;
 }
